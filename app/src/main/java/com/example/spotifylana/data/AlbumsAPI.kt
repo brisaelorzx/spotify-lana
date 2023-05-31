@@ -1,6 +1,7 @@
 package com.example.spotifylana.data
 
 import com.example.spotifylana.model.Album
+import com.example.spotifylana.model.AlbumResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -13,5 +14,5 @@ interface AlbumsAPI {
         @Header ("Authorization") token: String,
         @Path("id") artist: String
 
-    ): Call<ArrayList<Album>>
+    ): Call <AlbumResponse>
 }

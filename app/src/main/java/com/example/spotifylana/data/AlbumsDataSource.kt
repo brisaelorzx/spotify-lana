@@ -15,11 +15,12 @@ class AlbumsDataSource {
             .baseUrl(_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build().create(AlbumsAPI::class.java)
-        var result = api.getAlbums(artist, token).execute()
+        var result = api.getAlbums(token, artist).execute()
 
         return if (result.isSuccessful){
             Log.d(_TAG,"resultado exitoso")
-            result.body() ?: ArrayList<Album>()
+            Log.d(_TAG, result.body()?.items?.size.toString())
+            result.body()?.items ?: ArrayList<Album>()
             //Log.d(_TAG, it.size.toString)
 
         }else{
