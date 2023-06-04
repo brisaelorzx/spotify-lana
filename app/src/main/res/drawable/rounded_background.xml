@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <solid android:color="#FFFFFF" /> <!-- Color de fondo de la imagen -->
+        <corners android:radius="2.57dp" /> <!-- Radio del borde (ajusta según tus necesidades) -->
+
+    </item>
+
+</selector>

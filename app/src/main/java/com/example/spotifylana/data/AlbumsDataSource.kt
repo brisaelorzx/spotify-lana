@@ -18,6 +18,21 @@ class AlbumsDataSource {
         var result = api.getAlbums(token, artist).execute()
 
         return if (result.isSuccessful){
+            /*
+            val db = FirebaseFirestore.getInstance()
+
+            db.collection("universities").document("id").set(
+                hashMapOf(
+                    "name" to "contenido variable",
+                    "email" to "contenido variable 2"
+                    )
+            )
+
+            db.collection("universities") .document("id").get().addOnSuccessListener {
+                var nombre = it.get("name")
+            }
+            */
+
             Log.d(_TAG,"resultado exitoso")
             Log.d(_TAG, result.body()?.items?.size.toString())
             result.body()?.items ?: ArrayList<Album>()

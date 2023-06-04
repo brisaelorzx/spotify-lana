@@ -9,29 +9,28 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spotifylana.R
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     private lateinit var rvAlbums: RecyclerView
     private lateinit var adapter: AlbumsAdapter
+    private lateinit var firebaseAuth: FirebaseAuth
+    private val progressDialog by lazy { CustomProgressDialog(this) }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        firebaseAuth = FirebaseAuth.getInstance()
+        checkUser()
         bindView()
         bindViewModel()
-        /*
-        Handler(Looper.getMainLooper()).postDelayed({
-            var intent = Intent(this, SplashActivity::class.java)
-            startActivity(intent)
-            finish()
-
-        },4000)
-
-         */
     }
 
     override fun onStart() {
         super.onStart()
+        progressDialog.start("")
         viewModel.onStart()
     }
 
@@ -46,7 +45,17 @@ class MainActivity : AppCompatActivity() {
         viewModel.albums.observe(this) {
             // Actualizar la lista de la pantalla
              adapter.Update(it)
+             progressDialog.stop()
 
+
+        }
+    }
+    private fun checkUser() {
+        val firebaseUser = firebaseAuth.currentUser
+        if (firebaseUser == null) {
+            // Usuario no logueado
+            startActivity(Intent(this, Login::class.java))
+            finish()
         }
     }
 }
