@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="#00000000" /> <!-- Color transparente -->
+            <corners android:radius="36dp" /> <!-- Establece el radio del borde según tus preferencias -->
+            <stroke
+                android:width="2dp"
+                android:color="#CCCCCC" /> <!-- Establece el color y el ancho del borde -->
+        </shape>
+    </item>
+</selector>

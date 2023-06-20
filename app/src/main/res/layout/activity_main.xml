@@ -19,7 +19,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAlbums"
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="619dp"
         android:layout_marginTop="188dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,9 @@
         android:layout_width="303dp"
         android:layout_height="61dp"
         android:layout_marginTop="60dp"
-        android:background="#36C4C4C4"
+        android:background="@drawable/rounded_background"
+        android:text="search for an album..."
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/rvAlbums"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

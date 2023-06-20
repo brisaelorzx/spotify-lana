@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SpotifyLana"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:targetApi="27">
         <activity
             android:name=".ui.Login"
             android:exported="true" >
