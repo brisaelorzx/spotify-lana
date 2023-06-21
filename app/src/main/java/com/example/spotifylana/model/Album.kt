@@ -5,6 +5,6 @@ import java.util.Objects
 data class Album (
     val total_tracks: Int,
     val name: String,
-    val release_date_precision: String,
+    val release_date: String,
     val genres: ArrayList<String>,
     val images: ArrayList<Image>)

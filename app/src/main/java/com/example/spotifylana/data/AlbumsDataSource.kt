@@ -2,6 +2,7 @@ package com.example.spotifylana.data
 
 import android.util.Log
 import com.example.spotifylana.model.Album
+import com.google.firebase.firestore.FirebaseFirestore
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -21,7 +22,7 @@ class AlbumsDataSource {
             /*
             val db = FirebaseFirestore.getInstance()
 
-            db.collection("universities").document("id").set(
+            db.collection("albums").document("id").set(
                 hashMapOf(
                     "name" to "contenido variable",
                     "email" to "contenido variable 2"

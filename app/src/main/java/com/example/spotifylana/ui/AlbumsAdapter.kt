@@ -3,6 +3,7 @@ package com.example.spotifylana.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.spotifylana.R
@@ -10,6 +11,8 @@ import com.example.spotifylana.model.Album
 
 class AlbumsAdapter: RecyclerView.Adapter<AlbumViewHolder>() {
     var items: MutableList<Album> = ArrayList<Album>()
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.album_item, parent, false)
@@ -27,7 +30,10 @@ class AlbumsAdapter: RecyclerView.Adapter<AlbumViewHolder>() {
             .load(url)
             .placeholder(R.drawable.ic_launcher_foreground)
             .into(holder.image)
+
+
     }
+
 
     fun Update (lista: MutableList<Album>){
         items = lista

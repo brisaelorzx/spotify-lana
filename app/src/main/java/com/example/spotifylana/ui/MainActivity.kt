@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         rvAlbums.layoutManager= LinearLayoutManager(this)
         adapter = AlbumsAdapter()
         rvAlbums.adapter= adapter
+
     }
     private fun bindViewModel(){
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
