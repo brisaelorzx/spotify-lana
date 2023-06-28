@@ -1,6 +1,9 @@
 package com.example.spotifylana.ui
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.ColorFilter
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -31,29 +34,35 @@ class AlbumsAdapter: RecyclerView.Adapter<AlbumViewHolder>() {
             .load(url)
             .placeholder(R.drawable.ic_launcher_foreground)
             .into(holder.image)
-        ///...
+
+        // Favorito
+        var fav = false
+        holder.star.setOnClickListener {
+            if (fav) {
+                holder.star.clearColorFilter()
+                fav = false
+            } else {
+                holder.star.setColorFilter(Color.YELLOW)
+                fav= true
+            }
+           }
+
+        /// Click en album Item.
         holder.itemView.setOnClickListener {
             val nombre = items[position].name
             val fecha = items[position].release_date
-            val generos = items[position].genres
-            val imagen = items[position].images[1].url
+            val imagen = items[position].images[0].url
             val totalCanciones = items[position].total_tracks.toString()
 
         // Inicio de la otra activity
-
             val intentt = Intent(holder.itemView.context, SingleAlbum::class.java)
             intentt.putExtra("nombre",nombre)
             intentt.putExtra("fecha", fecha)
-            intentt.putExtra("generos", generos)
             intentt.putExtra("imagen", imagen)
             intentt.putExtra("totalCanciones", totalCanciones)
 
             holder.itemView.context.startActivity(intentt)
-
-
-
         }
-
 
     }
 

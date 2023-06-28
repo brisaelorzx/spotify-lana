@@ -1,7 +1,6 @@
 package com.example.spotifylana.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -23,12 +22,11 @@ class SingleAlbum: AppCompatActivity() {
 
 
         // Utilizar los datos obtenidos en tu actividad
-        // ...
         val img = findViewById<ImageView>(R.id.imageView10)
         val textView4 = findViewById<TextView>(R.id.textView4)
         val textFecha = findViewById<TextView>(R.id.textFecha)
-        val textView8 = findViewById<TextView>(R.id.textView8)
         val textView10 = findViewById<TextView>(R.id.textView10)
+        val botonVolver = findViewById<ImageView>(R.id.botonBack)
 
         Glide.with(this)
             .load(imagen)
@@ -37,7 +35,10 @@ class SingleAlbum: AppCompatActivity() {
 
         textView4.text = nombre
         textFecha.text= fecha
-        textView8.text= generos
         textView10.text= totalCanciones
+
+        botonVolver.setOnClickListener {
+            finish()
+        }
     }
 }
