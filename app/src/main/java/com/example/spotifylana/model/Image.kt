@@ -4,5 +4,4 @@ package com.example.spotifylana.model
      val url: String,
      val height: Int,
      val width: Int
-
-         )
+     )

@@ -12,12 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.spotifylana.R
 import com.example.spotifylana.model.Album
+import com.google.firebase.firestore.FirebaseFirestore
 
 class AlbumsAdapter: RecyclerView.Adapter<AlbumViewHolder>() {
     var items: MutableList<Album> = ArrayList<Album>()
-
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.album_item, parent, false)
         return AlbumViewHolder(view)
@@ -35,16 +33,37 @@ class AlbumsAdapter: RecyclerView.Adapter<AlbumViewHolder>() {
             .placeholder(R.drawable.ic_launcher_foreground)
             .into(holder.image)
 
+        // Base de datos
+        val db = FirebaseFirestore.getInstance()
         // Favorito
-        var fav = false
+        var favv: Any?= null
+        db.collection("favoritos").document(items[position].name).get().addOnSuccessListener {
+             var favv= it.get("fav")
+            if (items[position].fav || favv.toString() == "true"){
+                holder.star.setColorFilter(Color.YELLOW)
+            } else {
+                holder.star.clearColorFilter() }
+        }
+        // Click en la estrella Fav
         holder.star.setOnClickListener {
-            if (fav) {
+            if (items[position].fav || favv.toString() == "true") {
                 holder.star.clearColorFilter()
-                fav = false
+                items[position].fav = false
+                db.collection("favoritos").document(items[position].name).delete()
             } else {
                 holder.star.setColorFilter(Color.YELLOW)
-                fav= true
+                items[position].fav = true
+                db.collection("favoritos").document(items[position].name).set(
+                    hashMapOf(
+                        "totalTracks" to items[position].total_tracks,
+                        "name" to items[position].name,
+                        "releaseDate" to items[position].release_date,
+                        "images" to items[position].images,
+                        "fav" to items[position].fav
+                    )
+                )
             }
+
            }
 
         /// Click en album Item.

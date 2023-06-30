@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,6 +41,13 @@ class MainActivity : AppCompatActivity() {
         adapter = AlbumsAdapter()
         rvAlbums.adapter= adapter
 
+        val star: ImageView = findViewById(R.id.imageView7)
+
+        star.setOnClickListener {
+            val intent = Intent(this, Favorite::class.java)
+            startActivity(intent)
+        }
+
     }
     private fun bindViewModel(){
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
@@ -47,8 +55,6 @@ class MainActivity : AppCompatActivity() {
             // Actualizar la lista de la pantalla
              adapter.Update(it)
              progressDialog.stop()
-
-
         }
     }
     private fun checkUser() {

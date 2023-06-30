@@ -4,6 +4,7 @@ data class Album (
     val total_tracks: Int,
     val name: String,
     val release_date: String,
-    val images: ArrayList<Image>
+    val images: ArrayList<Image>,
+    var fav: Boolean = false
 
     )

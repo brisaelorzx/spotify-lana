@@ -16,8 +16,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="27">
         <activity
+            android:name=".ui.Favorite"
+            android:exported="false" />
+        <activity
             android:name=".ui.Login"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,14 +29,13 @@
         </activity>
         <activity
             android:name=".ui.SingleAlbum"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">
@@ -43,7 +45,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

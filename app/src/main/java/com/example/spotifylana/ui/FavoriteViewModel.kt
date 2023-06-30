@@ -1,5 +1,6 @@
 package com.example.spotifylana.ui
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,32 +11,26 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
 import kotlin.coroutines.CoroutineContext
 
-class MainViewModel: ViewModel() {
+
+class FavoriteViewModel: ViewModel() {
+
+    val albums: MutableLiveData<ArrayList<Album>> = MutableLiveData()
     // Constantes
-    private val _TAG = "API-DEMO"
     private val coroutineContext: CoroutineContext = newSingleThreadContext("uadedemo")
     private val scope = CoroutineScope(coroutineContext)
 
     // Dependencias
     private val albumsRepo = AlbumsRepository()
 
-
-    // Propiedades
-    var albums = MutableLiveData<ArrayList<Album>>()
-    var artist = "00FQb4jTyendYWaN8pK0wa"
-    var token = "Bearer BQB3g3dH9TQn9ZDjjIoK6UQBic4g1n69wzgLAz-BFbM2ylYg6rHRjNeLxo5_VfkG4Nz1hFF5bQqYf8JBrWsX74t6K14EunckJhpTac4t0oRhvbjmrLQ"
-    // Funciones
-    fun onStart() {
-        // Cargar los datos de los albums
+    fun onStart(context : Context, callback : (ArrayList<Album>) -> Unit) {
+        // Cargar los datos de los equipos
         scope.launch {
             kotlin.runCatching {
-                albumsRepo.getAlbums(artist, token)
+                albumsRepo.getFavAlbums(context, callback)
             }.onSuccess {
-                Log.d(_TAG, "Albums onSucces")
-                albums.postValue(it)
-                Log.d(_TAG, "capturo la info")
+                Log.d("FAVORITE VIEW MODEL", "Albums Fav on SuccesS" + it.toString())
             }.onFailure {
-                Log.e(_TAG, "Albums error" + it)
+                Log.e("FAVORITE VIEW MODEL", "FAVORITE Error: " + it)
             }
         }
     }

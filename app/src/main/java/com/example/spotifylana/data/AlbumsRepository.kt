@@ -1,5 +1,6 @@
 package com.example.spotifylana.data
 
+import android.content.Context
 import android.util.Log
 import com.example.spotifylana.model.Album
 
@@ -12,4 +13,9 @@ class AlbumsRepository {
         return albumsDS.getAlbums(artist, token)
 
     }
+
+    fun getFavAlbums(context: Context, callback: (ArrayList<Album>) -> Unit) {
+        albumsDS.getFavAlbums(context, callback)
+    }
+
 }
