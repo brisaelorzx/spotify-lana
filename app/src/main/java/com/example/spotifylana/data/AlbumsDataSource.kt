@@ -35,7 +35,6 @@ class AlbumsDataSource {
 
     }
     fun getFavAlbums (context: Context, callback: (ArrayList<Album>) -> Unit) {
-
         FirebaseApp.initializeApp(context)
         val database = FirebaseFirestore.getInstance()
         val albums = ArrayList<Album>()
