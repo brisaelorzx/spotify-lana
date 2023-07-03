@@ -36,7 +36,7 @@ class AlbumsAdapter: RecyclerView.Adapter<AlbumViewHolder>() {
         // Base de datos
         val db = FirebaseFirestore.getInstance()
         db.collection("favoritos").document("Lust For Life").get().addOnSuccessListener {
-            Log.i("firebaseeeeeeeee", "GOT VALUE ${it.get("total_tracks")}")
+            Log.i("firebaseeeeeeeee LUST FOR LIFE", "GOT VALUE ${it.get("total_Tracks")}")
         }
         // Favorito
         var favv: Any?= null
@@ -44,7 +44,7 @@ class AlbumsAdapter: RecyclerView.Adapter<AlbumViewHolder>() {
              var favv= it.get("fav")
             if (items[position].fav || favv.toString() == "true"){
                 holder.star.setColorFilter(Color.YELLOW)
-                Log.d("TRACKS EN ALBUM ADAPTER", it.get("total_tracks").toString())
+                Log.i("RELEASE DATE EN ALBUM ADAPTER", it.get("releaseDate").toString())
             } else {
                 holder.star.clearColorFilter() }
         }

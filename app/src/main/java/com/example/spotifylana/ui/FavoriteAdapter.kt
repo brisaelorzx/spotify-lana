@@ -1,4 +1,5 @@
 package com.example.spotifylana.ui
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -22,9 +23,10 @@ class FavoriteAdapter: RecyclerView.Adapter<AlbumViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
-        //var imagenes: String = items[position].images[0].url
+        //var imagenes: String = items[position].images[2].url
         Log.d("FAVORITE ADAPTER IMAGEEn", items[position].toString())
         holder.name.text = items[position].name
+        holder.star.setColorFilter(Color.YELLOW)
         /*
         Glide.with(holder.itemView.context)
             .load(url)
