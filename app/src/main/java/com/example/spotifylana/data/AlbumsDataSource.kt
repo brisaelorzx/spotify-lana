@@ -40,27 +40,32 @@ class AlbumsDataSource {
         val albums = ArrayList<Album>()
 
         database.collection("favoritos").get().addOnSuccessListener() {
-            result ->
-                    for (document in result) {
-                        // Accede a los datos de cada documento
-                        val fav = document.data
-                        // Haz algo con los datos del documento
-                        Log.d("DATASOURCE", "Favoritos traido")
+                result ->
+            for (document in result) {
+                // Accede a los datos de cada documento
 
-                        val album = Album(
-                            fav["total_tracks"] as? Int ?: 0,
-                            fav["name"] as? String ?: "",
-                            fav["release_date"] as? String ?: "",
-                            fav["images"] as? ArrayList<Image> ?: ArrayList(),
-                            fav["fav"] as? Boolean ?: false
-                        )
+                val fav = document.data
+                // Haz algo con los datos del documento
+                Log.d("DATASOURCE", "Favoritos traido")
 
-                        albums.add(album)
-                        Log.d("DATASOURCE", album.toString())
-                        Log.d("DATASOURCE", albums.toString())
-                        Log.d("DATASOURCE", "Favoritos Exitoso")
-                    }
-                    callback(albums)
+                var images = fav["images"] as? ArrayList<HashMap<String,Any>> ?: ArrayList()
+                var imgs : ArrayList<Image> = ArrayList()
+                images.map { imgs.add(Image(it["url"] as String, (it["height"] as Long).toInt(), (it["width"] as Long).toInt())) }
+
+                val album = Album(
+                    (fav["totalTracks"] as? Long)?.toInt() ?: 0,
+                    fav["name"] as? String ?: "",
+                    fav["releaseDate"] as? String ?: "",
+                    imgs,
+                    fav["fav"] as? Boolean ?: false
+                )
+
+                albums.add(album)
+                Log.d("DATASOURCE", album.toString())
+                Log.d("DATASOURCE", albums.toString())
+                Log.d("DATASOURCE", "Favoritos Exitoso")
+            }
+            callback(albums)
         } .addOnFailureListener { e ->
             // Maneja el error de obtener los documentos
             Log.d("DATASOURCE","Error al obtener los documentos de la colección: $e")

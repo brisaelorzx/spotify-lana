@@ -1,13 +1,9 @@
 package com.example.spotifylana.ui
-
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.ColorFilter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.spotifylana.R
@@ -35,16 +31,15 @@ class AlbumsAdapter: RecyclerView.Adapter<AlbumViewHolder>() {
 
         // Base de datos
         val db = FirebaseFirestore.getInstance()
-        db.collection("favoritos").document("Lust For Life").get().addOnSuccessListener {
-            Log.i("firebaseeeeeeeee LUST FOR LIFE", "GOT VALUE ${it.get("total_Tracks")}")
-        }
+
         // Favorito
         var favv: Any?= null
+        var option: String = "false"
         db.collection("favoritos").document(items[position].name).get().addOnSuccessListener {
              var favv= it.get("fav")
             if (items[position].fav || favv.toString() == "true"){
                 holder.star.setColorFilter(Color.YELLOW)
-                Log.i("RELEASE DATE EN ALBUM ADAPTER", it.get("releaseDate").toString())
+                option = "true"
             } else {
                 holder.star.clearColorFilter() }
         }
@@ -57,7 +52,6 @@ class AlbumsAdapter: RecyclerView.Adapter<AlbumViewHolder>() {
             } else {
                 holder.star.setColorFilter(Color.YELLOW)
                 items[position].fav = true
-                Log.d("TOTAL TRACKS AL AGREGAR FAV", items[position].total_tracks.toString())
                 db.collection("favoritos").document(items[position].name).set(
                     hashMapOf(
                         "totalTracks" to items[position].total_tracks,
@@ -77,13 +71,15 @@ class AlbumsAdapter: RecyclerView.Adapter<AlbumViewHolder>() {
             val fecha = items[position].release_date
             val imagen = items[position].images[0].url
             val totalCanciones = items[position].total_tracks.toString()
+            var fav = option
 
-        // Inicio de la otra activity
+            // Inicio de la otra activity
             val intentt = Intent(holder.itemView.context, SingleAlbum::class.java)
             intentt.putExtra("nombre",nombre)
             intentt.putExtra("fecha", fecha)
             intentt.putExtra("imagen", imagen)
             intentt.putExtra("totalCanciones", totalCanciones)
+            intentt.putExtra("fav", fav)
 
             holder.itemView.context.startActivity(intentt)
         }
