@@ -56,6 +56,11 @@ class MainActivity : AppCompatActivity() {
              adapter.Update(it)
              progressDialog.stop()
         }
+
+        var albums = adapter.items
+        for (album in albums){
+
+        }
     }
     private fun checkUser() {
         val firebaseUser = firebaseAuth.currentUser
