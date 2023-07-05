@@ -23,7 +23,7 @@ class MainViewModel: ViewModel() {
     // Propiedades
     var albums = MutableLiveData<ArrayList<Album>>()
     var artist = "00FQb4jTyendYWaN8pK0wa"
-    var token = "Bearer BQDUugOe-xmFd2kQM1-5vqvA1ZmXYYcbPLo-ldFxVdMHwqmVL4XZdNc-ieBcYnxupnfy7Sg9qhy0uryLxcmc5hLIfsZOdRxCvzOHyEa5GXmiGwJGEwg"
+    var token = "Bearer BQANekDi-OIhn6etkIIF73yUctD4v8FkrUHptMyfeED6TlC9baPwK84T74UTKWcbTs_Rf8xGB8wYKdODKo5fryNdqQQkRzJFLy2r8bqTtZmxffCICGg"
     // Funciones
     fun onStart() {
         // Cargar los datos de los albums
